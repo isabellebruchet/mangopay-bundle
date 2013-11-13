@@ -33,8 +33,13 @@ class ContributionManager
 
         $contribution = $this->denormalize($response);
 
-        $this->em->persist($contribution);
-        $this->em->flush();
+        return $contribution;
+    }
+    
+    public function get($id)
+    {
+        $response = $this->contributionRequest->fetch($id);
+        $contribution = $this->denormalize($response);
 
         return $contribution;
     }

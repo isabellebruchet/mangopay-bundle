@@ -32,8 +32,13 @@ class UserManager
         $response = $this->userRequest->create($parameters);
         $user     = $this->denormalize($response);
 
-        $this->em->persist($user);
-        $this->em->flush();
+        return $user;
+    }
+    
+    public function get($id)
+    {
+        $response = $this->userRequest->fetch($id);
+        $user     = $this->denormalize($response);
 
         return $user;
     }
@@ -43,9 +48,6 @@ class UserManager
         $response = $this->userRequest->update($user->getMangoPayId(), $this->normalize($user));
 
         $user = $this->denormalize($response, $user);
-
-        $this->em->persist($user);
-        $this->em->flush();
 
         return $user;
     }
