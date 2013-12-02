@@ -9,6 +9,7 @@ class PaymentCard
     protected $ownerId;
     protected $cardNumber;
     protected $mangoPayId;
+    protected $redirectUrl;
     protected $tag;
 
     public function getId()
@@ -64,4 +65,13 @@ class PaymentCard
         return $this;
     }
 
+    public function getRedirectUrl() {
+        return $this->redirectUrl;
+    }
+
+    public function setRedirectUrl($redirectUrl) {
+        $this->redirectUrl = $redirectUrl;
+        
+        return $this;
+    }
 }
