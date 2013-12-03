@@ -33,9 +33,6 @@ class TransferManager
         $response = $this->transferRequest->create($parameters);
         $transfer = $this->denormalize($response);
 
-        $this->em->persist($transfer);
-        $this->em->flush();
-
         return $transfer;
     }
 

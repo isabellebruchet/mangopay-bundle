@@ -33,9 +33,6 @@ class ImmediateContributionManager
 
         $immediateContribution = $this->denormalize($response);
 
-        $this->em->persist($immediateContribution);
-        $this->em->flush();
-
         return $immediateContribution;
     }
 
