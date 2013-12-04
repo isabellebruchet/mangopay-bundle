@@ -23,7 +23,7 @@ class BetacieMangoPayExtension extends Extension
         $configuration = new Configuration();
         $config        = $this->processConfiguration($configuration, $configs);
 
-        foreach (array('partner_id', 'private_key_file', 'private_key_passphrase', 'debug') as $key) {
+        foreach (array('partner_id', 'private_key_file', 'private_key_passphrase', 'url') as $key) {
             $container->setParameter('betacie_mango_pay.' . $key, $config[$key]);
         }
 

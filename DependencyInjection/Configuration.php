@@ -26,7 +26,7 @@ class Configuration implements ConfigurationInterface
             ->scalarNode('partner_id')->isRequired()->end()
             ->scalarNode('private_key_file')->isRequired()->end()
             ->scalarNode('private_key_passphrase')->isRequired()->end()
-            ->scalarNode('debug')->isRequired()->end()
+            ->scalarNode('url')->isRequired()->end()
             ->end()
         ;
 

@@ -5,7 +5,9 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="betacie_mango_pay.client.class">Betacie\MangoPay\MangoPayClient</parameter>
+        <parameter key="betacie_mango_pay.client.class">Guzzle\Http\Client</parameter>
+
+        <parameter key="betacie.guzzle.leetchi_client.class">Betacie\MangoPay\LeetchiPlugin</parameter>
 
         <parameter key="betacie_mango_pay.message.beneficiary.class">Betacie\MangoPay\Message\BeneficiaryRequest</parameter>
         <parameter key="betacie_mango_pay.message.contribution.class">Betacie\MangoPay\Message\ContributionRequest</parameter>
@@ -26,10 +28,24 @@
 
         <!-- Client -->
         <service id="betacie_mango_pay.client" class="%betacie_mango_pay.client.class%">
-            <argument>%betacie_mango_pay.partner_id%</argument>
+            <argument>%betacie_mango_pay.url%</argument>
+            <argument type="collection">
+                <argument>%betacie_mango_pay.partner_id%</argument>
+                <argument key="partnerId">%betacie_mango_pay.partner_id%</argument>
+                <argument key="ssl.certificate_authority">false</argument>
+                <argument key="request.options" type="collection">
+                    <argument key="headers" type="collection">
+                        <argument key="Content-Type">application/json</argument>
+                    </argument>
+                </argument>
+            </argument>
+        </service>
+
+        <!-- Plugin -->
+        <service id="betacie.guzzle.leetchi_client" class="%betacie.guzzle.leetchi_client.class%">
             <argument>%betacie_mango_pay.private_key_file%</argument>
             <argument>%betacie_mango_pay.private_key_passphrase%</argument>
-            <argument>%betacie_mango_pay.debug%</argument>
+            <tag name="betacie_mango_pay.plugin" />
         </service>
 
         <!-- Message -->

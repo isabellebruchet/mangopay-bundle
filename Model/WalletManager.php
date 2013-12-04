@@ -44,16 +44,30 @@ class WalletManager
         return $wallet;
     }
 
+    public function get(Wallet $wallet)
+    {
+        $response = $this->walletRequest->fetch($wallet->getMangoPayId());
+        $wallet   = $this->denormalize($response, $wallet);
+
+        $this->em->persist($wallet);
+        $this->em->flush();
+
+        return $wallet;
+    }
+
     /**
      * Transform Guzzle Response to a Wallet
      *
      * @param \Guzzle\Http\Message\Response $response
      */
-    public function denormalize(Response $response)
+    public function denormalize(Response $response, Wallet $wallet = null)
     {
         $bag = new ResponseBag($response->json());
 
-        $wallet = new Wallet();
+        if (null === $wallet) {
+            $wallet = new Wallet();
+        }
+
         $wallet
             ->setAmount($bag->get('Amount'))
             ->setCollectedAmount($bag->get('CollectedAmount'))
