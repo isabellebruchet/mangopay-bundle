@@ -19,6 +19,7 @@ class User
     protected $canRegisterMeanOfPayment;
     protected $hasRegisteredMeansOfPayment;
     protected $mangoPayId;
+    protected $personalWalletAmount;
 
     public function getId()
     {
@@ -178,5 +179,14 @@ class User
 
         return $this;
     }
+    
+    public function getPersonalWalletAmount() {
+        return $this->personalWalletAmount;
+    }
 
+    public function setPersonalWalletAmount($personalWalletAmount) {
+        $this->personalWalletAmount = $personalWalletAmount;
+        
+        return $this;
+    }
 }

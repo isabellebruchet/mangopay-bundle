@@ -72,6 +72,7 @@ class UserManager
             ->setNationality($bag->get('Nationality'))
             ->setPersonType($bag->get('PersonType'))
             ->setTag($bag->get('Tag'))
+            ->setPersonalWalletAmount($bag->get('PersonalWalletAmount'))
         ;
 
         return $user;
