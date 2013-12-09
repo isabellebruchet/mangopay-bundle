@@ -29,20 +29,21 @@ class WithdrawalManager
 
     public function create(array $parameters)
     {
-        try {
-            $response = $this->withdrawalRequest->create($parameters);
-        } catch (\Exception $e) {
-            var_dump($e->getResponse()->getBody(true));
-            exit;
-        }
+        $response = $this->withdrawalRequest->create($parameters);
 
         $withdrawal = $this->denormalize($response);
 
-        $this->em->persist($withdrawal);
-        $this->em->flush();
+        return $withdrawal;
+    }
+    
+    public function get($id)
+    {
+        $response = $this->withdrawalRequest->fetch($id);
+        $withdrawal = $this->denormalize($response);
 
         return $withdrawal;
     }
+    
 
     public function denormalize(Response $response)
     {
