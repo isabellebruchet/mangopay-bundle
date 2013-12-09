@@ -32,8 +32,13 @@ class BeneficiaryManager
         $response    = $this->beneficiaryRequest->create($parameters);
         $beneficiary = $this->denormalize($response);
 
-        $this->em->persist($beneficiary);
-        $this->em->flush();
+        return $beneficiary;
+    }
+    
+    public function get($id)
+    {
+        $response = $this->beneficiaryRequest->fetch($id);
+        $beneficiary = $this->denormalize($response);
 
         return $beneficiary;
     }
