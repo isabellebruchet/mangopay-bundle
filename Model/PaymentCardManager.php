@@ -64,10 +64,9 @@ class PaymentCardManager
 
     public function delete(PaymentCard $paymentCard)
     {
-        $this->paymentCardRequest->delete($paymentCard->getMangoPayId());
-
-        $this->em->remove($paymentCard);
-        $this->em->flush();
+        $result = $this->paymentCardRequest->delete($paymentCard->getMangoPayId());
+        
+        return ($result->json() == 'OK') ? true : false;
     }
 
     private function getRepository()
