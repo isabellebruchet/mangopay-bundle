@@ -3,10 +3,12 @@
 namespace Betacie\Bundle\MangoPayBundle\Model;
 
 use Betacie\Bundle\MangoPayBundle\Entity\User;
+use Betacie\Bundle\MangoPayBundle\Entity\PaymentCard;
 use Betacie\Bundle\MangoPayBundle\ResponseBag;
 use Betacie\MangoPay\Message\UserRequest;
 use Doctrine\ORM\EntityManager;
 use Guzzle\Http\Message\Response;
+use Doctrine\Common\Collections\ArrayCollection;
 
 class UserManager
 {
@@ -50,6 +52,27 @@ class UserManager
         $user = $this->denormalize($response, $user);
 
         return $user;
+    }
+    
+    public function getCards($id) {
+        $response = $this->userRequest->getCards($id);
+        $bag = new ResponseBag($response->json());
+        
+        $cards = new ArrayCollection();
+        
+        for($i = 0;$i < $bag->count(); $i++) {
+            $card = new PaymentCard();
+            $cardInfos = $bag->get($i);
+            
+            $card
+                ->setMangoPayId($cardInfos['ID'])
+                ->setCardNumber($cardInfos['CardNumber'])
+            ;
+            
+            $cards->add($card);
+        }
+        
+        return $cards;
     }
 
     public function denormalize(Response $response, User $user = null)

@@ -16,5 +16,9 @@ class ResponseBag
     {
         return array_key_exists($name, $this->parameters) ? $this->parameters[$name] : $default;
     }
+    
+    public function count() {
+        return count($this->parameters);
+    }
 
 }
