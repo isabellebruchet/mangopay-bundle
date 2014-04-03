@@ -32,9 +32,6 @@ class RefundManager
         $response = $this->refundRequest->create($parameters);
         $refund   = $this->denormalize($response);
 
-        $this->em->persist($refund);
-        $this->em->flush();
-
         return $refund;
     }
 

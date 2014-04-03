@@ -93,7 +93,7 @@ class Refund
         return $this;
     }
 
-    public function getIsSucceeded()
+    public function isSucceeded()
     {
         return $this->isSucceeded;
     }
@@ -105,7 +105,7 @@ class Refund
         return $this;
     }
 
-    public function getIsCompleted()
+    public function isCompleted()
     {
         return $this->isCompleted;
     }
