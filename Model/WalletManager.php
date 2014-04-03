@@ -38,9 +38,6 @@ class WalletManager
         $response = $this->walletRequest->create($parameters);
         $wallet   = $this->denormalize($response);
 
-        $this->em->persist($wallet);
-        $this->em->flush();
-
         return $wallet;
     }
 
@@ -48,9 +45,6 @@ class WalletManager
     {
         $response = $this->walletRequest->fetch($wallet->getMangoPayId());
         $wallet   = $this->denormalize($response, $wallet);
-
-        $this->em->persist($wallet);
-        $this->em->flush();
 
         return $wallet;
     }
