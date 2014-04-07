@@ -34,6 +34,14 @@ class RefundManager
 
         return $refund;
     }
+    
+    public function get($id)
+    {
+        $response = $this->refundRequest->fetch($id);
+        $refund     = $this->denormalize($response);
+
+        return $refund;
+    }
 
     public function denormalize(Response $response)
     {

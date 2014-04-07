@@ -41,12 +41,23 @@ class WalletManager
         return $wallet;
     }
 
-    public function get(Wallet $wallet)
+    public function get($id)
     {
-        $response = $this->walletRequest->fetch($wallet->getMangoPayId());
-        $wallet   = $this->denormalize($response, $wallet);
+        $response = $this->walletRequest->fetch($id);
+        $wallet   = $this->denormalize($response);
 
         return $wallet;
+    }
+    
+    /**
+     * Fetch operations on a wallet
+     *
+     * @param  integer                       $walletId
+     * @return \Guzzle\Http\Message\Response
+     */
+    public function getOperations($walletId)
+    {
+        return $this->walletRequest->getOperations($walletId);
     }
 
     /**
