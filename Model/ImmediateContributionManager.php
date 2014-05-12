@@ -35,6 +35,14 @@ class ImmediateContributionManager
 
         return $immediateContribution;
     }
+    
+    public function get($id)
+    {
+        $response = $this->immediateContributionRequest->fetch($id);
+        $immediateContribution     = $this->denormalize($response);
+
+        return $immediateContribution;
+    }
 
     public function denormalize(Response $response)
     {
